@@ -1,0 +1,80 @@
+#include <stdio.h>
+int main(){
+	int dept, pass_status=0, distinction=0, seat, theory, practical;
+	float attend;
+	
+	printf("Enter department(1=Computer Science, 2=Electrical Engineering, 3=Business Administration, 4=Mathematics): \n");
+	scanf("%d",&dept);
+	printf("Enter marks in theory examination: ");
+	scanf("%d",&theory);
+	printf("Enter marks in practical examination: ");
+	scanf("%d",&practical);
+	printf("Enter attendance percentage:");
+	scanf("%f",&attend);
+	
+	switch(dept){
+		case 1: //computer science
+		  if (theory >= 50 && practical >= 40 && attend >= 75) {
+            pass_status = 1;
+          }
+		  break;
+		
+		case 2: //Electrical engineering
+		  if (theory >= 55 && practical >= 45 && attend >= 75) {
+            pass_status = 1;
+          }
+		  break;
+		
+		case 3: //business administration
+		  if (theory >= 50 && practical >= 35 && attend >= 80) {
+            pass_status = 1;
+          }
+		  break;
+		
+		case 4: //mathematics
+		  if (theory >= 60 && practical >= 40 && attend >= 75) {
+            pass_status = 1;
+          }
+		  break;
+		
+		default: printf("Error! Enter number 1,2,3 or 4 only\n");
+		  break; 
+	}
+if (dept==1 || dept==2 || dept==3 || dept==4) {
+
+  if (theory >= 85 && practical >= 80 && attend >= 90) {
+        distinction = 1; //eligible
+    }
+	
+	printf("\n-----FINAL REPORT-----\n");
+	printf("Selected Department: ");
+    switch (dept) {
+        case 1: 
+		printf("Computer Science\n");
+		printf("Applicable passing requirements: atleast 50 in theory, 40 in practical and 75%% attendance\n");//to make % show do double%
+		break;
+        case 2: 
+		printf("Electrical Engineering\n");
+		printf("Applicable passing requirements: atleast 55 in theory, 45 in practical and 75%% attendance\n");
+		break;
+        case 3:
+		printf("Business Administration\n");
+		printf("Applicable passing requirements: atleast 50 in theory, 35 in practical and 80%% attendance\n");
+		break;
+        case 4: 
+		printf("Mathematics\n"); 
+		printf("Applicable passing requirements: atleast 60 in theory, 40 in practical and 75%% attendance\n");
+		break;
+    }
+	printf("Theory Marks: %d\n", theory);
+	printf("Practical Marks: %d\n", practical);
+	printf("Attendance percentage: %.2f\n", attend);
+   
+	seat= theory%3; 
+	// Conditional operators for :
+    printf("Final Result: %s\n", pass_status ? "Passed" : "Failed");
+    printf("Distinction Eligibility: %s\n", distinction ? "Eligible" : "Not Eligible");
+    printf("Seat Category: %c\n", (seat == 0) ? 'A' : (seat == 1) ? 'B' : 'C');
+}
+return 0;
+}
