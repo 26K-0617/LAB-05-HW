@@ -1,0 +1,128 @@
+#include <stdio.h>
+int main(){
+ int prod_cat, customer_cat, shipping=0, additional=0, deliv_cat=0, order_num, ship_status;
+ float order_amount, dist, dis_rate=0.0, dis_amount=0.0, final=0.0;	
+
+printf("Enter order number: ");
+scanf("%d",&order_num); 
+printf("Enter product category (1=Electronics, 2=Clothings, 3=Books, 4=Household)\n");
+scanf("%d",&prod_cat);
+printf("Enter customer's category (1=Regular, 2=Premium, 3=Corporate)\n");
+scanf("%d",&customer_cat);
+printf("Enter order amount: ");
+scanf("%f",&order_amount);
+printf("Enter delivery distance in km: ");
+scanf("%f",&dist);
+
+if ((prod_cat==1 || prod_cat==2 || prod_cat==3 || prod_cat==4)&&(customer_cat==1||customer_cat==2|| customer_cat==3)){
+
+switch(prod_cat){
+case 1: //electronics
+	switch(customer_cat){
+	case 1 : //regular
+	    dis_rate= 0.05;
+	    break;
+	case 2: //premium
+	    dis_rate= 0.1;
+        break;
+	case 3:  //corporate
+	    dis_rate=0.15;
+	    break;
+	default: printf("Error! enter 1,2 or 3 only\n");
+	break;
+	}
+break;
+case 2:  //clothing
+    switch(customer_cat){
+	case 1:  //regular
+	    dis_rate= 0.1;
+	    break;
+	case 2: //premium
+	    dis_rate= 0.15;
+        break;
+	case 3:  //corporate
+	    dis_rate=0.2;
+	    break;
+	default: printf("Error! enter 1,2 or 3 only\n");
+	break;
+	}
+break;
+case 3:  //books
+    switch(customer_cat){
+	case 1:  //regular
+	    dis_rate= 0.08;
+	    break;
+	case 2: //premium
+	    dis_rate= 0.12;
+        break;
+	case 3:  //corporate
+	    dis_rate=0.18;
+	    break;
+	default: printf("Error! enter 1,2 or 3 only\n");
+	break;
+	} 
+break;
+case 4:  //household
+    switch(customer_cat){
+	case 1:  //regular
+	    dis_rate= 0.07;
+	    break;
+	case 2: //premium
+	    dis_rate= 0.14;
+        break;
+	case 3:  //corporate
+	    dis_rate=0.2;
+	    break;
+	default: printf("Error! enter 1,2 or 3 only\n");
+	break;
+	}
+break;
+default: printf("Enter 1,2,3or 4 only\n");
+break;  
+}
+dis_amount= order_amount*dis_rate;
+final= order_amount-dis_amount;
+
+if (final>=5000||customer_cat==2 ||customer_cat==3){
+	shipping=0;
+	ship_status=1; //for conditional 1 is shipping free
+} else //shipping is delivery charge
+  { shipping=dist*10;
+  ship_status=0;//charges apply
+  }
+
+  if ((customer_cat==2 || customer_cat==3)&&(order_amount>=10000)){
+	additional=500;
+	deliv_cat= 1;//priority deliv status:priority
+  }else { additional=0;
+        deliv_cat= 0;//normal
+   }
+  int remain =order_num % 4;//processing group
+   //output
+  printf("\n-----Final Output-----\n");
+  switch(prod_cat){
+	case 1: printf("Product Category: Electronics\n"); break;
+	case 2: printf("Product Category: Clothing\n"); break;
+	case 3: printf("Product Category: Books\n"); break;
+	case 4: printf("Product Category: Household goods\n"); break;
+   }
+  switch(customer_cat){
+	case 1: printf("Customer Category: Regular\n"); break;
+	case 2: printf("Customer Category: Premium\n"); break;
+	case 3: printf("Customer Category: Corporate\n"); break;
+  }
+  printf("Original order amount: %.2f\n",order_amount);
+  printf("Applicable discount percentage: %.2f%%\n",dis_rate*100.0);
+  printf("Discount Amount: %.2f\n", dis_amount);
+  printf("Final payable amount: %.2f\n",final);
+  printf("Delivery distance: %.2f\n",dist);
+  printf("Shipping status: %s\n" , (ship_status==1) ? "Free shipping": "Delivery charges apply");
+  printf("Delivery Charges: %d\n",shipping);
+  printf("Priority delivery status: %s\n", (deliv_cat==1) ? "Priority" : "Normal");
+  printf("Priority charges: %d\n", additional);
+  printf("Processing group: %c\n", (remain == 0)? 'A' : (remain == 1)? 'B' : (remain==2)? 'C': 'D');
+  printf("Total amount payable: %.2f",final+shipping+additional);
+}else {
+	printf("Error! Invalid product or customer category entered\n");
+}
+return 0;}
