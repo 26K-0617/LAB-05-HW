@@ -42,7 +42,7 @@ int main(){
 	}
 if (dept==1 || dept==2 || dept==3 || dept==4) {
 
-  if (theory >= 85 && practical >= 80 && attend >= 90) {
+  if (pass_status==1 && theory >= 85 && practical >= 80 && attend >= 90) {
         distinction = 1; //eligible
     }
 	
@@ -68,12 +68,12 @@ if (dept==1 || dept==2 || dept==3 || dept==4) {
     }
 	printf("Theory Marks: %d\n", theory);
 	printf("Practical Marks: %d\n", practical);
-	printf("Attendance percentage: %.2f\n", attend);
+	printf("Attendance percentage: %.2f%%\n", attend);
    
-	seat= theory%3; 
+	seat= theory % 3; 
 	// Conditional operators for :
-    printf("Final Result: %s\n", pass_status ? "Passed" : "Failed");
-    printf("Distinction Eligibility: %s\n", distinction ? "Eligible" : "Not Eligible");
+    printf("Final Result: %s\n", (pass_status==1) ? "Passed" : "Failed");
+    printf("Distinction Eligibility: %s\n", (distinction==1) ? "Eligible" : "Not Eligible");
     printf("Seat Category: %c\n", (seat == 0) ? 'A' : (seat == 1) ? 'B' : 'C');
 }
 return 0;
